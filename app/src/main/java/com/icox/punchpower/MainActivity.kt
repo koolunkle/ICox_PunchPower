@@ -95,7 +95,8 @@ class MainActivity : AppCompatActivity() {
             sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION),
             SensorManager.SENSOR_DELAY_NORMAL
         )
-        imageView.startAnimation(AnimationUtils.loadAnimation(this@MainActivity, R.anim.translate))
+//        imageView.startAnimation(AnimationUtils.loadAnimation(this@MainActivity, R.anim.translate))
+        imageView.startAnimation(AnimationUtils.loadAnimation(this@MainActivity, R.anim.rotate))
     }
 
     // 펀치력 측정이 완료된 경우 처리 함수
