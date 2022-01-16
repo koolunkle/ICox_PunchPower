@@ -8,6 +8,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
+import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -50,6 +51,8 @@ class MainActivity : AppCompatActivity() {
 
 //                측정이 시작된 경우
                 if (isStart) {
+//                    Animation 제거
+                    imageView.clearAnimation()
 //                    5초간 최댓값을 측정 -> 측정된 값이 기존 최댓값보다 크면 새로 갱신
                     if (maxPower < power)
                         maxPower = power
@@ -97,12 +100,32 @@ class MainActivity : AppCompatActivity() {
         )
 //        imageView.startAnimation(AnimationUtils.loadAnimation(this@MainActivity, R.anim.translate))
 //        imageView.startAnimation(AnimationUtils.loadAnimation(this@MainActivity, R.anim.rotate))
-        imageView.startAnimation(
-            AnimationUtils.loadAnimation(
-                this@MainActivity,
-                R.anim.alpha_scale
-            )
-        )
+
+        /* imageView.startAnimation(
+               AnimationUtils.loadAnimation(
+                   this@MainActivity,
+                   R.anim.alpha_scale
+               )
+           ) */
+
+//        Animation 시작
+        val animation = AnimationUtils.loadAnimation(this@MainActivity, R.anim.alpha_scale)
+        imageView.startAnimation(animation)
+
+//        AnimationListener 설정
+        animation.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation?) {
+
+            }
+
+            override fun onAnimationEnd(animation: Animation?) {
+
+            }
+
+            override fun onAnimationRepeat(animation: Animation?) {
+
+            }
+        })
     }
 
     // 펀치력 측정이 완료된 경우 처리 함수
