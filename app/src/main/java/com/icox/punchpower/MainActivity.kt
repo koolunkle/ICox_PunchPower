@@ -1,5 +1,8 @@
 package com.icox.punchpower
 
+import android.animation.Animator
+import android.animation.AnimatorInflater
+import android.animation.AnimatorListenerAdapter
 import android.content.Context
 import android.content.Intent
 import android.hardware.Sensor
@@ -8,8 +11,6 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -108,7 +109,7 @@ class MainActivity : AppCompatActivity() {
                )
            ) */
 
-//        Animation 시작
+/* //        Animation 시작
         val animation = AnimationUtils.loadAnimation(this@MainActivity, R.anim.alpha_scale)
         imageView.startAnimation(animation)
 
@@ -125,7 +126,22 @@ class MainActivity : AppCompatActivity() {
             override fun onAnimationRepeat(animation: Animation?) {
 
             }
-        })
+        }) */
+
+//        property_animation 불러오기 -> apply 함수를 사용하면 로딩된 Animator 가 this 로 저장됨
+        AnimatorInflater.loadAnimator(this@MainActivity, R.animator.property_animation).apply {
+//            Animation 종료 Listener 추가
+            addListener(object : AnimatorListenerAdapter() {
+                // Animation 이 종료될 때 Animation 다시 시작
+                override fun onAnimationEnd(animation: Animator?) {
+                    start()
+                }
+            })
+//            property_animation 의 타겟을 imageView 로 지정
+            setTarget(imageView)
+//            Animation 시작
+            start()
+        }
     }
 
     // 펀치력 측정이 완료된 경우 처리 함수
