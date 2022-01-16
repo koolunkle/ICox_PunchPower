@@ -13,4 +13,14 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.PunchPower.Result">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:buttonStyle">@style/ButtonColor</item>
+        <item name="colorButtonNormal">@color/colorPrimary</item>
+    </style>
+
+    <style name="ButtonColor" parent="@style/Widget.AppCompat.Button">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 </resources>
