@@ -8,6 +8,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -94,6 +95,7 @@ class MainActivity : AppCompatActivity() {
             sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION),
             SensorManager.SENSOR_DELAY_NORMAL
         )
+        imageView.startAnimation(AnimationUtils.loadAnimation(this@MainActivity, R.anim.translate))
     }
 
     // 펀치력 측정이 완료된 경우 처리 함수
