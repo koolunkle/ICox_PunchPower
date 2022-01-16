@@ -1,8 +1,6 @@
 package com.icox.punchpower
 
-import android.animation.Animator
-import android.animation.AnimatorInflater
-import android.animation.AnimatorListenerAdapter
+import android.animation.*
 import android.content.Context
 import android.content.Intent
 import android.hardware.Sensor
@@ -141,6 +139,21 @@ class MainActivity : AppCompatActivity() {
             setTarget(imageView)
 //            Animation 시작
             start()
+        }
+
+//        color_animation 불러오기 -> apply 함수를 사용하면 로딩된 Animator 가 this 로 저장됨
+        AnimatorInflater.loadAnimator(this@MainActivity, R.animator.color_animation).apply {
+//            color_animation 을 불러오고 ObjectAnimator 클래스로 캐스팅
+            val colorAnimator = this@apply as? ObjectAnimator
+//            colorAnimator 가 ObjectAnimator 인 경우에만 실행
+            colorAnimator?.apply {
+//                Evaluator 를 ArgbEvaluator()로 설정
+                setEvaluator(ArgbEvaluator())
+//                타겟을 Activity 의 ContentView 로 지정
+                target = window.decorView.findViewById(android.R.id.content)
+//                Animation 시작
+                start()
+            }
         }
     }
 
